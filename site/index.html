@@ -1,0 +1,549 @@
+<!-- @dsCard group="Brand" viewport="1280x900" name="OneTechGirl — Brand Website" subtitle="Responsive marketing site, hero + sections" -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>OneTechGirl — AI, made simple</title>
+<meta name="description" content="AI made simple for business owners. I test the tools so you don't have to. Tutorials, reviews, and ready-to-use automations from @onetechgirl." />
+<link rel="stylesheet" href="../styles.css" />
+<script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
+<style>
+  /* ============================================================
+     OneTechGirl — marketing site. Built on the DS tokens.
+     ============================================================ */
+  html { scroll-behavior: smooth; }
+  body { background: var(--paper); color: var(--ink-950); overflow-x: hidden; }
+  .wrap { width: min(100% - 2.5rem, var(--container)); margin-inline: auto; }
+  .wrap-md { width: min(100% - 2.5rem, var(--container-md)); margin-inline: auto; }
+  section { position: relative; }
+
+  /* Grounds */
+  .ink   { background: var(--ink-950); color: #fff; }
+  .ink h1, .ink h2, .ink h3 { color: #fff; }
+  .paper { background: var(--paper); color: var(--ink-950); }
+  .lime  { background: var(--lime-400); color: var(--ink-950); }
+  .lime h1, .lime h2, .lime h3 { color: var(--ink-950); }
+
+  /* Shared bits */
+  .eyebrow { display: inline-flex; align-items: center; gap: 10px; font: var(--fw-bold) clamp(12px,1.4vw,14px)/1 var(--font-mono); text-transform: uppercase; letter-spacing: 0.16em; }
+  .eyebrow::before { content: ""; width: 26px; height: 2px; background: currentColor; opacity: 0.5; }
+  .ink .eyebrow { color: var(--lime-400); }
+  .paper .eyebrow { color: var(--coral-600); }
+  .lime .eyebrow { color: var(--ink-800); }
+
+  .hl { background: var(--lime-400); color: var(--ink-950); padding: 0 .28em; border-radius: 10px; box-decoration-break: clone; -webkit-box-decoration-break: clone; }
+  .strike { position: relative; white-space: nowrap; }
+  .strike::after { content: ""; position: absolute; left: -4px; right: -4px; top: 54%; height: .09em; background: var(--coral-500); transform: rotate(-2deg); border-radius: 6px; }
+  .coral { color: var(--coral-500); }
+
+  /* Buttons */
+  .btn { display: inline-flex; align-items: center; gap: 10px; font: var(--fw-bold) clamp(15px,1.7vw,17px)/1 var(--font-sans); padding: 16px 26px; border-radius: var(--radius-pill); border: 2px solid transparent; cursor: pointer; transition: transform var(--dur-fast) var(--ease-out), background var(--dur-fast) var(--ease-out), box-shadow var(--dur-fast) var(--ease-out); white-space: nowrap; text-decoration: none; }
+  .btn i { width: 19px; height: 19px; }
+  .btn:hover { text-decoration: none; transform: translateY(-2px); }
+  .btn-lime { background: var(--lime-400); color: var(--ink-950); box-shadow: var(--shadow-lime); }
+  .btn-lime:hover { background: var(--lime-300); }
+  .btn-ink { background: var(--ink-950); color: #fff; }
+  .btn-ink:hover { background: var(--ink-800); }
+  .btn-ghost { background: transparent; border-color: currentColor; color: inherit; }
+  .btn-ghost:hover { background: rgba(255,255,255,0.08); }
+  .paper .btn-ghost:hover { background: rgba(14,14,16,0.05); }
+
+  /* ---------- Nav ---------- */
+  header.nav { position: sticky; top: 0; z-index: var(--z-sticky); background: rgba(250,250,247,0.82); backdrop-filter: saturate(1.4) blur(14px); border-bottom: 1px solid var(--ink-150); }
+  .nav-in { display: flex; align-items: center; justify-content: space-between; height: 74px; }
+  .nav-logo img { height: 44px; width: auto; }
+  .nav-links { display: flex; align-items: center; gap: 34px; }
+  .nav-links a { color: var(--ink-700); font: var(--fw-semibold) 16px var(--font-sans); }
+  .nav-links a:hover { color: var(--ink-950); text-decoration: none; }
+  .nav-cta { display: flex; align-items: center; gap: 14px; }
+  .nav-toggle { display: none; background: none; border: none; padding: 8px; cursor: pointer; color: var(--ink-950); }
+  .nav-toggle i { width: 26px; height: 26px; }
+
+  /* ---------- Hero ---------- */
+  .hero { overflow: hidden; }
+  .hero-grid { display: grid; grid-template-columns: 1.15fr 0.85fr; gap: 40px; align-items: center; padding: clamp(48px,7vw,96px) 0 0; }
+  .hero-badge { display: inline-flex; align-items: center; gap: 10px; background: var(--ink-800); color: #fff; padding: 9px 18px; border-radius: var(--radius-pill); font: var(--fw-semibold) 14px var(--font-mono); margin-bottom: 26px; }
+  .hero-badge .dot { width: 9px; height: 9px; border-radius: 50%; background: var(--lime-400); box-shadow: 0 0 0 4px rgba(198,255,58,0.18); }
+  .hero h1 { font-size: clamp(46px, 7vw, 92px); line-height: 1.12; letter-spacing: -0.04em; }
+  .hero h1 .hl { display: inline-block; margin-top: 0.12em; }
+  .hero p.lede { font-size: clamp(18px, 2.1vw, 23px); line-height: 1.5; color: var(--ink-300); max-width: 30ch; margin-top: 26px; }
+  .hero-actions { display: flex; flex-wrap: wrap; gap: 14px; margin-top: 36px; }
+  .hero-proof { display: flex; align-items: center; gap: 14px; margin-top: 34px; color: var(--ink-400); font: var(--fw-medium) 15px var(--font-mono); }
+  .hero-proof .ava { display: flex; }
+  .hero-proof .ava img { width: 40px; height: 40px; border-radius: 50%; border: 2px solid var(--ink-950); object-fit: cover; margin-left: -12px; }
+  .hero-proof .ava img:first-child { margin-left: 0; }
+
+  .hero-photo { position: relative; align-self: end; justify-self: center; width: min(100%, 430px); }
+  .hero-photo .disc { position: absolute; right: -16px; bottom: -16px; width: 80%; height: 84%; border-radius: 26px; background: var(--lime-400); z-index: 1; }
+  .hero-photo img.me { position: relative; z-index: 2; display: block; width: 100%; height: auto; border-radius: 26px; border: 3px solid var(--ink-950); box-shadow: 0 24px 44px rgba(0,0,0,0.5); }
+  .hero-photo .tag { position: absolute; z-index: 3; background: #fff; color: var(--ink-950); border-radius: 16px; padding: 12px 16px; box-shadow: var(--shadow-lg); font: var(--fw-bold) 15px var(--font-sans); display: flex; align-items: center; gap: 10px; }
+  .hero-photo .tag i { width: 22px; height: 22px; }
+  .hero-photo .tag.t1 { top: 9%; left: -7%; }
+  .hero-photo .tag.t1 i { color: var(--coral-500); }
+  .hero-photo .tag.t2 { bottom: 9%; right: -7%; }
+  .hero-photo .tag.t2 i { color: var(--lime-600); }
+
+  /* ---------- Marquee ---------- */
+  .marquee { overflow: hidden; padding: 18px 0; border-block: 3px solid var(--ink-950); }
+  .marquee-track { display: flex; gap: 48px; width: max-content; animation: scroll 26s linear infinite; }
+  .marquee-track span { display: inline-flex; align-items: center; gap: 48px; font: var(--fw-bold) clamp(20px,2.6vw,30px)/1 var(--font-sans); letter-spacing: -0.01em; text-transform: uppercase; white-space: nowrap; }
+  .marquee-track span::after { content: "✦"; color: var(--coral-600); }
+  @keyframes scroll { to { transform: translateX(-50%); } }
+  @media (prefers-reduced-motion: reduce) { .marquee-track { animation: none; } }
+
+  /* ---------- Section heads ---------- */
+  .sec { padding: clamp(64px, 9vw, 120px) 0; }
+  .sec-head { max-width: 720px; }
+  .sec-head h2 { font-size: clamp(34px, 5vw, 60px); line-height: 1.0; letter-spacing: -0.035em; margin-top: 18px; }
+  .sec-head p { font-size: clamp(17px, 1.9vw, 21px); line-height: 1.5; margin-top: 18px; color: var(--ink-600); }
+  .ink .sec-head p { color: var(--ink-300); }
+
+  /* ---------- Problem ---------- */
+  .problem { text-align: center; }
+  .problem .big { font-family: var(--font-display); font-weight: 700; font-size: clamp(30px, 4.6vw, 58px); line-height: 1.04; letter-spacing: -0.035em; max-width: 18ch; margin: 0 auto; }
+  .problem .big em { font-style: normal; color: var(--coral-600); }
+  .problem .sub { margin: 28px auto 0; max-width: 56ch; font-size: clamp(16px,1.8vw,20px); line-height: 1.55; color: var(--ink-600); }
+
+  /* ---------- Value cards ---------- */
+  .cards { display: grid; grid-template-columns: repeat(2, 1fr); gap: 22px; margin-top: 56px; }
+  .card { background: var(--white); border: 2px solid var(--ink-950); border-radius: var(--radius-xl); padding: 34px; box-shadow: var(--shadow-sticker); transition: transform var(--dur-base) var(--ease-out), box-shadow var(--dur-base) var(--ease-out); }
+  .card:hover { transform: translate(-3px,-3px); box-shadow: 8px 8px 0 var(--ink-950); }
+  .card .ic { width: 62px; height: 62px; border-radius: 16px; display: flex; align-items: center; justify-content: center; background: var(--lime-400); color: var(--ink-950); margin-bottom: 22px; }
+  .card .ic i { width: 30px; height: 30px; }
+  .card:nth-child(2) .ic { background: var(--coral-500); color: #fff; }
+  .card:nth-child(3) .ic { background: var(--ink-950); color: var(--lime-400); }
+  .card h3 { font-size: clamp(22px,2.4vw,28px); letter-spacing: -0.02em; line-height: 1.06; }
+  .card p { margin-top: 12px; font-size: 17px; line-height: 1.5; color: var(--ink-600); }
+
+  /* ---------- Featured content ---------- */
+  /* ---------- Featured content (horizontal post rows) ---------- */
+  .feed { display: flex; flex-direction: column; gap: 14px; margin-top: 56px; }
+  .post { display: grid; grid-template-columns: 150px 1fr auto; align-items: center; gap: 32px; padding: 30px 34px; border-radius: var(--radius-lg); background: var(--ink-900); border: 1px solid var(--ink-700); text-decoration: none; transition: transform var(--dur-base) var(--ease-out), border-color var(--dur-base) var(--ease-out), background var(--dur-base) var(--ease-out); }
+  .post:hover { transform: translateX(6px); border-color: var(--lime-400); background: var(--ink-800); text-decoration: none; }
+  .post .tag { font: var(--fw-bold) 12px var(--font-mono); text-transform: uppercase; letter-spacing: 0.12em; color: var(--lime-400); }
+  .post .title { font-family: var(--font-display); font-weight: 700; font-size: clamp(20px,2.3vw,28px); line-height: 1.06; letter-spacing: -0.025em; color: #fff; }
+  .post .title b { color: var(--coral-500); }
+  .post .go { display: inline-flex; align-items: center; gap: 8px; color: var(--ink-300); font: var(--fw-medium) 14px var(--font-mono); white-space: nowrap; }
+  .post .go i { width: 18px; height: 18px; transition: transform var(--dur-base) var(--ease-out); }
+  .post:hover .go { color: var(--lime-400); }
+  .post:hover .go i { transform: translate(3px,-3px); }
+
+  /* ---------- Lead magnet ---------- */
+  .lead-grid { display: grid; grid-template-columns: 1.1fr 0.9fr; gap: 40px; align-items: center; }
+  .lead h2 { font-size: clamp(32px,4.6vw,56px); line-height: 0.98; letter-spacing: -0.035em; }
+  .lead p { font-size: clamp(17px,1.9vw,20px); line-height: 1.5; color: var(--ink-800); margin-top: 18px; max-width: 42ch; }
+  .lead form { display: flex; gap: 12px; margin-top: 30px; flex-wrap: wrap; }
+  .lead input { flex: 1; min-width: 220px; padding: 17px 22px; border-radius: var(--radius-pill); border: 2px solid var(--ink-950); background: #fff; font: var(--fw-medium) 16px var(--font-sans); color: var(--ink-950); }
+  .lead input::placeholder { color: var(--ink-400); }
+  .lead input:focus-visible { outline: 3px solid var(--ink-950); outline-offset: 2px; }
+  .lead .fine { margin-top: 16px; font: var(--fw-medium) 14px var(--font-mono); color: var(--ink-700); }
+  .lead-card { background: var(--ink-950); color: #fff; border-radius: var(--radius-xl); padding: 30px; box-shadow: var(--shadow-xl); }
+  .lead-card .row { display: flex; align-items: flex-start; gap: 14px; padding: 14px 0; border-bottom: 1px solid var(--ink-800); }
+  .lead-card .row:last-child { border-bottom: none; }
+  .lead-card .row i { width: 24px; height: 24px; color: var(--lime-400); flex: none; margin-top: 1px; }
+  .lead-card .row b { display: block; font-size: 17px; }
+  .lead-card .row span { font-size: 14px; color: var(--ink-400); }
+
+  /* ---------- About ---------- */
+  .about-grid { display: grid; grid-template-columns: 0.85fr 1.15fr; gap: clamp(32px,5vw,64px); align-items: center; }
+  .about-photo { position: relative; }
+  .about-photo img { width: 100%; border-radius: var(--radius-2xl); border: 3px solid var(--ink-950); }
+  .about-photo .stamp { position: absolute; bottom: -18px; right: -10px; background: var(--lime-400); color: var(--ink-950); border: 3px solid var(--ink-950); border-radius: var(--radius-pill); padding: 12px 22px; font: var(--fw-bold) 16px var(--font-sans); transform: rotate(-4deg); box-shadow: var(--shadow-sticker); }
+  .about h2 { font-size: clamp(30px,4.4vw,52px); line-height: 1.0; letter-spacing: -0.03em; }
+  .about p { margin-top: 20px; font-size: clamp(17px,1.9vw,20px); line-height: 1.6; color: var(--ink-700); }
+  .about .sig { margin-top: 26px; font: var(--fw-semibold) 18px var(--font-mono); color: var(--coral-600); }
+
+  /* ---------- Stats + testimonials ---------- */
+  .stats { display: grid; grid-template-columns: repeat(3,1fr); gap: 22px; margin-bottom: 56px; }
+  .stat { text-align: center; padding: 14px; }
+  .stat b { display: block; font-family: var(--font-display); font-weight: 700; font-size: clamp(40px,6vw,72px); line-height: 1; letter-spacing: -0.04em; color: var(--lime-400); }
+  .stat span { display: block; margin-top: 8px; font: var(--fw-medium) 14px var(--font-mono); color: var(--ink-400); text-transform: uppercase; letter-spacing: 0.08em; }
+  .quotes { display: grid; grid-template-columns: repeat(3,1fr); gap: 22px; }
+  .quote { background: var(--ink-900); border: 1px solid var(--ink-700); border-radius: var(--radius-lg); padding: 28px; }
+  .quote .stars { display: flex; gap: 3px; color: var(--lime-400); margin-bottom: 16px; }
+  .quote .stars i { width: 18px; height: 18px; fill: currentColor; }
+  .quote p { font-size: 18px; line-height: 1.5; color: #fff; }
+  .quote .by { display: flex; align-items: center; gap: 12px; margin-top: 22px; }
+  .quote .by img { width: 44px; height: 44px; border-radius: 50%; object-fit: cover; }
+  .quote .by b { font-size: 15px; color: #fff; }
+  .quote .by span { display: block; font: var(--fw-medium) 13px var(--font-mono); color: var(--ink-400); }
+
+  /* ---------- Final CTA + footer ---------- */
+  .final { text-align: center; }
+  .final h2 { font-size: clamp(38px,6.5vw,86px); line-height: 0.95; letter-spacing: -0.04em; }
+  .final p { margin: 22px auto 0; max-width: 44ch; font-size: clamp(17px,2vw,21px); color: var(--ink-800); }
+  .final .hero-actions { justify-content: center; }
+  footer { background: var(--ink-950); color: #fff; padding: 64px 0 40px; }
+  .foot-top { display: flex; align-items: center; justify-content: space-between; gap: 24px; flex-wrap: wrap; padding-bottom: 36px; border-bottom: 1px solid var(--ink-800); }
+  .foot-top img { height: 30px; }
+  .foot-social { display: flex; gap: 12px; }
+  .foot-social a { width: 46px; height: 46px; border-radius: 50%; border: 1px solid var(--ink-700); display: flex; align-items: center; justify-content: center; color: #fff; transition: background var(--dur-fast), color var(--dur-fast); }
+  .foot-social a:hover { background: var(--lime-400); color: var(--ink-950); border-color: var(--lime-400); }
+  .foot-social a i { width: 20px; height: 20px; }
+  .foot-bottom { display: flex; align-items: center; justify-content: space-between; gap: 14px; flex-wrap: wrap; padding-top: 26px; color: var(--ink-400); font: var(--fw-medium) 14px var(--font-mono); }
+  .foot-bottom a { color: var(--ink-300); }
+
+  /* ---------- Studio brand band (full-bleed) ---------- */
+  .studio { position: relative; min-height: clamp(460px, 62vw, 660px); display: flex; align-items: center; overflow: hidden; background: var(--ink-950); }
+  .studio img.bg { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 60% center; z-index: 0; }
+  .studio .scrim { position: absolute; inset: 0; z-index: 1; background: linear-gradient(90deg, rgba(10,10,12,0.94) 0%, rgba(10,10,12,0.82) 34%, rgba(10,10,12,0.45) 60%, rgba(10,10,12,0.05) 82%, rgba(10,10,12,0) 100%); }
+  .studio .wrap { position: relative; z-index: 2; }
+  .studio-copy { max-width: 600px; color: #fff; }
+  .studio-copy .logo-lockup { display: flex; align-items: center; gap: 14px; margin-bottom: 26px; }
+  .studio-copy .logo-lockup img { height: 40px; width: auto; }
+  .studio-copy .logo-lockup span { font: var(--fw-bold) 15px var(--font-mono); text-transform: uppercase; letter-spacing: 0.14em; color: var(--lime-400); }
+  .studio-copy h2 { font-size: clamp(34px, 5vw, 62px); line-height: 1.0; letter-spacing: -0.035em; color: #fff; }
+  .studio-copy h2 em { font-style: normal; color: var(--lime-400); }
+  .studio-copy p { margin-top: 22px; font-size: clamp(17px, 1.9vw, 21px); line-height: 1.5; color: var(--ink-300); max-width: 46ch; }
+  .studio-copy .signoff { margin-top: 26px; font: var(--fw-semibold) 17px var(--font-mono); color: var(--coral-500); }
+  @media (max-width: 760px) {
+    .studio { align-items: flex-end; min-height: 600px; }
+    .studio img.bg { object-position: 64% 18%; }
+    .studio .scrim { background: linear-gradient(0deg, rgba(10,10,12,0.96) 0%, rgba(10,10,12,0.82) 30%, rgba(10,10,12,0.4) 58%, rgba(10,10,12,0.1) 100%); }
+    .studio .wrap { padding-bottom: 48px; padding-top: 80px; }
+  }
+
+  /* ============================================================
+     Responsive
+     ============================================================ */
+  @media (max-width: 900px) {
+    .nav-links { display: none; }
+    .nav-toggle { display: inline-flex; }
+    header.nav.open .nav-links { display: flex; position: absolute; top: 74px; left: 0; right: 0; flex-direction: column; gap: 0; background: var(--paper); border-bottom: 1px solid var(--ink-150); padding: 8px 20px 18px; }
+    header.nav.open .nav-links a { padding: 14px 0; border-bottom: 1px solid var(--ink-100); width: 100%; }
+    .hero-grid { grid-template-columns: 1fr; gap: 8px; }
+    .hero-photo { order: -1; max-width: 360px; }
+    .hero h1 { max-width: 14ch; }
+    .lead-grid, .about-grid { grid-template-columns: 1fr; }
+    .about-photo { max-width: 380px; }
+    .feed { grid-template-columns: 1fr; }
+    .quotes { grid-template-columns: 1fr; }
+  }
+  @media (max-width: 560px) {
+    .cards, .stats { grid-template-columns: 1fr; }
+    .post { grid-template-columns: 1fr; gap: 12px; padding: 24px 26px; }
+    .post .go { justify-self: start; }
+    .stats { gap: 8px; margin-bottom: 40px; }
+    .hero-actions .btn, .lead input, .lead .btn { width: 100%; justify-content: center; }
+    .hero-photo .tag { display: none; }
+  }
+
+  /* Reveal on scroll */
+  .reveal { opacity: 0; transform: translateY(24px); transition: opacity 0.7s var(--ease-out), transform 0.7s var(--ease-out); }
+  .reveal.in { opacity: 1; transform: none; }
+  @media (prefers-reduced-motion: reduce) { .reveal { opacity: 1; transform: none; } }
+</style>
+</head>
+<body>
+  <template id="__bundler_thumbnail">
+    <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+      <rect width="100" height="100" fill="#0E0E10"/>
+      <rect x="30" y="30" width="40" height="40" rx="10" fill="#C6FF3A"/>
+      <text x="50" y="62" font-family="monospace" font-size="20" font-weight="700" fill="#0E0E10" text-anchor="middle">oTg</text>
+    </svg>
+  </template>
+
+  <!-- ================= NAV ================= -->
+  <header class="nav" id="nav">
+    <div class="wrap nav-in">
+      <a class="nav-logo" href="#top" aria-label="OneTechGirl home"><img src="../assets/logo-oto-black-alpha.png" alt="OneTechGirl" /></a>
+      <nav class="nav-links">
+        <a href="#what">What you get</a>
+        <a href="../ui_kits/blog/index.html">Blog</a>
+        <a href="#about">About</a>
+        <a href="#newsletter">Newsletter</a>
+      </nav>
+      <div class="nav-cta">
+        <a href="#newsletter" class="btn btn-ink">Get the Signal <i data-lucide="arrow-right"></i></a>
+        <button class="nav-toggle" id="navToggle" aria-label="Menu"><i data-lucide="menu"></i></button>
+      </div>
+    </div>
+  </header>
+
+  <!-- ================= HERO ================= -->
+  <section class="ink hero" id="top" data-screen-label="Hero">
+    <div class="wrap hero-grid">
+      <div class="hero-copy reveal">
+        <span class="hero-badge"><span class="dot"></span> AI, made simple — for business owners</span>
+        <h1>Stop <span class="strike">Googling</span> "how do I use AI." <span class="hl">Just ask.</span></h1>
+        <p class="lede">I test every tool, cut the jargon, and hand you the exact steps — so you can put AI to work this week, not someday.</p>
+        <div class="hero-actions">
+          <a href="#newsletter" class="btn btn-lime">Get free AI playbooks <i data-lucide="arrow-right"></i></a>
+          <a href="../ui_kits/blog/index.html" class="btn btn-ghost">Read the blog <i data-lucide="arrow-right"></i></a>
+        </div>
+        <div class="hero-proof">
+          <span class="ava">
+            <img src="https://randomuser.me/api/portraits/women/44.jpg" alt="" />
+            <img src="https://randomuser.me/api/portraits/women/68.jpg" alt="" />
+            <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="" />
+          </span>
+          Loved by 120k+ owners learning AI the simple way
+        </div>
+      </div>
+      <div class="hero-photo reveal">
+        <div class="disc"></div>
+        <img class="me" src="../assets/photo-hero3.png" alt="OneTechGirl" />
+        <div class="tag t1"><i data-lucide="sparkles"></i> No prompts to memorize</div>
+        <div class="tag t2"><i data-lucide="clock"></i> 20 min to your first win</div>
+      </div>
+    </div>
+    <div style="height: clamp(40px,6vw,80px)"></div>
+  </section>
+
+  <!-- ================= MARQUEE ================= -->
+  <div class="lime marquee" aria-hidden="true">
+    <div class="marquee-track">
+      <span>I test the tools so you don't have to</span>
+      <span>AI made simple</span>
+      <span>Signal over noise</span>
+      <span>No tech degree required</span>
+      <span>I test the tools so you don't have to</span>
+      <span>AI made simple</span>
+      <span>Signal over noise</span>
+      <span>No tech degree required</span>
+    </div>
+  </div>
+
+  <!-- ================= PROBLEM ================= -->
+  <section class="paper sec problem" data-screen-label="Problem">
+    <div class="wrap-md reveal">
+      <span class="eyebrow">Real talk</span>
+      <p class="big" style="margin-top:22px;">You don't need to be techy. You need <em>20 minutes</em> and someone to show you what actually matters.</p>
+      <p class="sub">Most AI advice is either too basic or written for engineers. OneTechGirl is the in-between: plain-English, business-first, and tested on real, messy, day-to-day work.</p>
+    </div>
+  </section>
+
+  <!-- ================= WHAT YOU GET ================= -->
+  <section class="paper sec" id="what" data-screen-label="What you get" style="padding-top:0;">
+    <div class="wrap">
+      <div class="sec-head reveal">
+        <span class="eyebrow">What you get</span>
+        <h2>Everything you need to put AI to work — minus the overwhelm.</h2>
+      </div>
+      <div class="cards">
+        <div class="card reveal">
+          <div class="ic"><i data-lucide="graduation-cap"></i></div>
+          <h3>Plain-English tutorials</h3>
+          <p>Step-by-step walkthroughs you can follow without a single technical term. Watch, copy, done.</p>
+        </div>
+        <div class="card reveal">
+          <div class="ic"><i data-lucide="badge-check"></i></div>
+          <h3>Honest tool reviews</h3>
+          <p>I try the tools, hit the limits, and tell you which ones are worth your time and money — and which aren't.</p>
+        </div>
+        <div class="card reveal">
+          <div class="ic"><i data-lucide="zap"></i></div>
+          <h3>Ready-to-use automations</h3>
+          <p>Copy-paste setups that read, summarize, and post for you — so the busywork runs while you sleep.</p>
+        </div>
+        <div class="card reveal">
+          <div class="ic"><i data-lucide="messages-square"></i></div>
+          <h3>A community that gets it</h3>
+          <p>Ask the "dumb" questions. Everyone here started exactly where you are. No gatekeeping, ever.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= FEATURED CONTENT ================= -->
+  <section class="ink sec" id="content" data-screen-label="Content">
+    <div class="wrap">
+      <div class="sec-head reveal">
+        <span class="eyebrow">Latest drops</span>
+        <h2>Bite-sized breakdowns, posted weekly.</h2>
+        <p>Plain-English takes on the AI news that actually matters — here without the algorithm deciding what you see.</p>
+      </div>
+      <div class="feed">
+        <a class="post reveal" href="../ui_kits/blog/article.html?id=chatgpt-memory">
+          <span class="tag">AI News · 4 min</span>
+          <span class="title">ChatGPT can now remember you. Here's what that <b>really changes.</b></span>
+          <span class="go">Read <i data-lucide="arrow-up-right"></i></span>
+        </a>
+        <a class="post reveal" href="../ui_kits/blog/article.html?id=ai-tools-week">
+          <span class="tag">Tools · 6 min</span>
+          <span class="title">7 AI tools I actually used this week (and <b>3 I dropped</b>)</span>
+          <span class="go">Read <i data-lucide="arrow-up-right"></i></span>
+        </a>
+        <a class="post reveal" href="../ui_kits/blog/article.html?id=agents-explained">
+          <span class="tag">Explainer · 5 min</span>
+          <span class="title">What "agents" actually are, in <b>plain English</b></span>
+          <span class="go">Read <i data-lucide="arrow-up-right"></i></span>
+        </a>
+      </div>
+      <div class="reveal" style="margin-top:28px;">
+        <a href="../ui_kits/blog/index.html" class="btn btn-lime">View all posts <i data-lucide="arrow-right"></i></a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= STUDIO BRAND BAND ================= -->
+  <section class="studio" data-screen-label="Studio">
+    <img class="bg" src="../assets/photo-studio.png" alt="OneTechGirl working in her studio" />
+    <div class="scrim"></div>
+    <div class="wrap">
+      <div class="studio-copy reveal">
+        <div class="logo-lockup">
+          <img src="../assets/logo-oto-white-alpha.png" alt="OneTechGirl" />
+          <span>In the studio</span>
+        </div>
+        <h2>Real tools. Real work. <em>Tested live.</em></h2>
+        <p>Everything I share starts here — at my desk, in the mess, trying the tools on actual business work before it ever reaches your feed.</p>
+        <p class="signoff">— if it makes the cut, you'll hear about it.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= LEAD MAGNET ================= -->
+  <section class="lime sec" id="newsletter" data-screen-label="Newsletter">
+    <div class="wrap lead-grid">
+      <div class="lead reveal">
+        <span class="eyebrow">The Signal — free weekly</span>
+        <h2>One email. Only the AI that's worth your time.</h2>
+        <p>Every week I send the one tool, one workflow, and one prompt actually worth trying — tested, summarized, and ready to use. No noise.</p>
+        <form onsubmit="return subscribe(event)">
+          <input type="email" name="email" placeholder="you@yourbusiness.com" aria-label="Email address" required />
+          <button class="btn btn-ink" type="submit">Get the Signal <i data-lucide="send"></i></button>
+        </form>
+        <p class="fine" id="leadNote">Join 38,000+ owners. Unsubscribe anytime — no hard feelings.</p>
+      </div>
+      <div class="lead-card reveal">
+        <div class="row"><i data-lucide="check-circle-2"></i><div><b>One tool, tested</b><span>What it does, what it costs, who it's for.</span></div></div>
+        <div class="row"><i data-lucide="check-circle-2"></i><div><b>One workflow you can copy</b><span>Steal my exact setup, paste it into your week.</span></div></div>
+        <div class="row"><i data-lucide="check-circle-2"></i><div><b>One prompt that works</b><span>Tested on real business tasks, not demos.</span></div></div>
+        <div class="row"><i data-lucide="check-circle-2"></i><div><b>Zero jargon, ever</b><span>If your teenager couldn't follow it, I rewrite it.</span></div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= ABOUT ================= -->
+  <section class="paper sec" id="about" data-screen-label="About">
+    <div class="wrap about-grid">
+      <div class="about-photo reveal">
+        <img src="../assets/photo-portrait.png" alt="OneTechGirl, founder" />
+        <span class="stamp">Hi, I'm your OneTechGirl 👋</span>
+      </div>
+      <div class="about reveal">
+        <span class="eyebrow">About</span>
+        <h2>I test the tools so you don't have to.</h2>
+        <p>I started OneTechGirl because I watched brilliant business owners feel dumb about AI — not because they couldn't get it, but because nobody explained it like a human.</p>
+        <p>So that's what I do. I try every tool, break things, find what works, and hand you the shortcut in plain English. No hype, no overwhelm — just the next simple step.</p>
+        <p class="sig">— made simple, @onetechgirl</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= STATS + TESTIMONIALS ================= -->
+  <section class="ink sec" data-screen-label="Proof">
+    <div class="wrap">
+      <div class="stats">
+        <div class="stat reveal"><b>120K+</b><span>Owners following</span></div>
+        <div class="stat reveal"><b>500+</b><span>Tools tested</span></div>
+        <div class="stat reveal"><b>4.9★</b><span>Newsletter rating</span></div>
+      </div>
+      <div class="quotes">
+        <figure class="quote reveal">
+          <div class="stars"><i data-lucide="star"></i><i data-lucide="star"></i><i data-lucide="star"></i><i data-lucide="star"></i><i data-lucide="star"></i></div>
+          <p>"I went from scared of AI to automating my whole inbox in a weekend. She makes it feel doable."</p>
+          <figcaption class="by"><img src="https://randomuser.me/api/portraits/women/44.jpg" alt="" /><div><b>Renée M.</b><span>Bakery owner</span></div></figcaption>
+        </figure>
+        <figure class="quote reveal">
+          <div class="stars"><i data-lucide="star"></i><i data-lucide="star"></i><i data-lucide="star"></i><i data-lucide="star"></i><i data-lucide="star"></i></div>
+          <p>"Finally, AI advice that doesn't assume I'm a developer. The newsletter is the only one I actually read."</p>
+          <figcaption class="by"><img src="https://randomuser.me/api/portraits/women/68.jpg" alt="" /><div><b>Dana K.</b><span>Salon founder</span></div></figcaption>
+        </figure>
+        <figure class="quote reveal">
+          <div class="stars"><i data-lucide="star"></i><i data-lucide="star"></i><i data-lucide="star"></i><i data-lucide="star"></i><i data-lucide="star"></i></div>
+          <p>"Saved me ~6 hours a week with one automation. I tell every business owner I know to follow her."</p>
+          <figcaption class="by"><img src="https://randomuser.me/api/portraits/women/65.jpg" alt="" /><div><b>Priya S.</b><span>Online coach</span></div></figcaption>
+        </figure>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= FINAL CTA ================= -->
+  <section class="lime sec final" data-screen-label="Final CTA">
+    <div class="wrap-md reveal">
+      <span class="eyebrow" style="justify-content:center;">Your move</span>
+      <h2>Pick one tool. Try it today.</h2>
+      <p>Stop scrolling, start automating. Get the free playbooks and let's make AI the easiest part of running your business.</p>
+      <div class="hero-actions">
+        <a href="#newsletter" class="btn btn-ink">Get the Signal <i data-lucide="arrow-right"></i></a>
+        <a href="#content" class="btn btn-ghost">See the content <i data-lucide="play"></i></a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= FOOTER ================= -->
+  <footer data-screen-label="Footer">
+    <div class="wrap">
+      <div class="foot-top">
+        <img src="../assets/logo-oto-white-alpha.png" alt="OneTechGirl" />
+        <div class="foot-social">
+          <a href="#" aria-label="Instagram"><i data-lucide="instagram"></i></a>
+          <a href="#" aria-label="YouTube"><i data-lucide="youtube"></i></a>
+          <a href="#" aria-label="TikTok"><i data-lucide="music-2"></i></a>
+          <a href="#newsletter" aria-label="Newsletter"><i data-lucide="mail"></i></a>
+        </div>
+      </div>
+      <div class="foot-bottom">
+        <span>© 2026 OneTechGirl · AI, made simple.</span>
+        <span>I test the tools so you don't have to · <a href="#top">Back to top ↑</a></span>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Mobile nav
+    const nav = document.getElementById('nav');
+    document.getElementById('navToggle').addEventListener('click', () => nav.classList.toggle('open'));
+    nav.querySelectorAll('.nav-links a').forEach(a => a.addEventListener('click', () => nav.classList.remove('open')));
+
+    // Newsletter (demo)
+    // Newsletter → Formspree
+    // 1. Create a form at formspree.io, copy its endpoint (looks like https://formspree.io/f/abcdwxyz)
+    // 2. Paste it below, replacing YOUR_FORM_ID. That's it — emails land in your Formspree inbox.
+    const FORMSPREE_ENDPOINT = 'https://formspree.io/f/xdavyanq';
+    window.subscribe = async function (e) {
+      e.preventDefault();
+      const form = e.target;
+      const note = document.getElementById('leadNote');
+      if (FORMSPREE_ENDPOINT.indexOf('YOUR_FORM_ID') !== -1) {
+        note.textContent = 'Almost live — paste your Formspree form ID into the code to start collecting emails.';
+        note.style.color = 'var(--ink-950)';
+        form.reset();
+        return false;
+      }
+      note.textContent = 'Sending…';
+      note.style.color = 'var(--ink-800)';
+      try {
+        const res = await fetch(FORMSPREE_ENDPOINT, {
+          method: 'POST',
+          body: new FormData(form),
+          headers: { Accept: 'application/json' }
+        });
+        if (res.ok) {
+          note.textContent = "You're in! Check your inbox to confirm. 💚";
+          note.style.color = 'var(--ink-950)';
+          form.reset();
+        } else {
+          note.textContent = "Hmm, that didn't go through — mind trying again?";
+          note.style.color = 'var(--coral-600)';
+        }
+      } catch (err) {
+        note.textContent = 'Network hiccup — try again in a second.';
+        note.style.color = 'var(--coral-600)';
+      }
+      return false;
+    };
+
+    // Reveal on scroll
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach(en => { if (en.isIntersecting) { en.target.classList.add('in'); io.unobserve(en.target); } });
+    }, { threshold: 0.12, rootMargin: '0px 0px -8% 0px' });
+    document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+
+    window.lucide && window.lucide.createIcons();
+  </script>
+</body>
+</html>
